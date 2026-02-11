@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IoPersonCircle, IoBriefcase, IoTime, IoPin, IoNotifications, IoShield, IoHelpCircle, IoLogOut } from 'react-icons/io5';
+import { IoPersonCircle, IoNotifications, IoShield, IoHelpCircle, IoLogOut } from 'react-icons/io5';
 import NotificationModal from './NotificationModal';
 import './AccountTab.css';
 

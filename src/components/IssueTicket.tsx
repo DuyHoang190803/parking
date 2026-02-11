@@ -19,7 +19,7 @@ const IssueTicket = ({ onClose }: IssueTicketProps) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [registration, setRegistration] = useState('');
   const [bayNumber, setBayNumber] = useState('B-042');
-  const [zoneAuto, setZoneAuto] = useState('Zone B - North');
+  const [zoneAuto] = useState('Zone B - North');
   const [violationType, setViolationType] = useState<ViolationType>('overstay');
   const [dateTime, setDateTime] = useState(new Date().toISOString().slice(0, 16));
   const [notes, setNotes] = useState('');

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IoSearch, IoWarning, IoTime, IoCar } from 'react-icons/io5';
+import { IoSearch, IoCar } from 'react-icons/io5';
 import './VehiclesTab.css';
 
 interface Vehicle {

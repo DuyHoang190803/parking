@@ -11,7 +11,7 @@ import AccountTab from './components/AccountTab'
 import ZoneDetail from './components/ZoneDetail'
 import LotDetail from './components/LotDetail'
 import IssueTicket from './components/IssueTicket'
-import { IoSearch, IoLocation, IoMenu, IoMap, IoStatsChart, IoCar, IoPerson, IoQrCode } from 'react-icons/io5'
+import { IoMap, IoStatsChart, IoCar, IoPerson, IoQrCode } from 'react-icons/io5'
 
 interface ParkingSpot {
   id: number;

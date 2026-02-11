@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IoChevronBack, IoFunnel, IoCheckmarkCircle, IoWarning, IoCloseCircle, IoChevronDown } from 'react-icons/io5';
+import { IoChevronBack, IoFunnel, IoCheckmarkCircle, IoWarning, IoCloseCircle } from 'react-icons/io5';
 import './ZoneDetail.css';
 
 interface ParkingLot {
