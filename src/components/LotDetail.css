@@ -1,0 +1,202 @@
+.lot-detail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  background: #0a0a0a;
+  overflow-y: auto;
+  padding-bottom: 80px;
+  z-index: 200;
+}
+
+.lot-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: #1a1a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 15px;
+}
+
+.lot-detail-header h2 {
+  flex: 1;
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.session-btn {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.session-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lot-detail-content {
+  padding: 20px;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.info-card h3 {
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.info-value {
+  font-size: 15px;
+  color: white;
+  font-weight: 600;
+}
+
+.info-value.highlight {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.issue-ticket-btn {
+  width: 100%;
+  padding: 16px;
+  background: #dc2626;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+  margin-bottom: 15px;
+}
+
+.issue-ticket-btn:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+.issue-ticket-btn:active {
+  transform: scale(0.98);
+}
+
+.view-history-btn {
+  width: 100%;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.view-history-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.view-history-btn:active {
+  transform: scale(0.98);
+}
+
+.confirm-compliance-btn {
+  width: 100%;
+  padding: 16px;
+  background: #10b981;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+  margin-bottom: 15px;
+}
+
+.confirm-compliance-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.confirm-compliance-btn:active {
+  transform: scale(0.98);
+}
+
+.change-session-btn {
+  width: 100%;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.change-session-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.change-session-btn:active {
+  transform: scale(0.98);
+}

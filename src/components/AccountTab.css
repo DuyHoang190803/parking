@@ -1,0 +1,207 @@
+.account-tab {
+  width: 100%;
+  height: 100vh;
+  background: #0a0a0a;
+  overflow-y: auto;
+  padding-bottom: 80px;
+}
+
+.account-header {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  padding: 30px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-avatar {
+  color: #4A90E2;
+}
+
+.profile-info h2 {
+  font-size: 24px;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.employee-id {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 0;
+}
+
+.account-content {
+  padding: 20px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.info-card {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.info-value.on-duty {
+  color: #10b981;
+}
+
+.shift-hour-card {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.assigned-zones-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 15px;
+  padding-left: 4px;
+}
+
+.zones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.zone-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  transition: all 0.2s;
+}
+
+.zone-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(74, 144, 226, 0.3);
+}
+
+.zone-color {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.zone-info {
+  flex: 1;
+}
+
+.zone-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.zone-lots {
+  font-size: 13px;
+  color: #999;
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  border-radius: 12px;
+}
+
+.menu-item:hover {
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.menu-item:active {
+  background: rgba(74, 144, 226, 0.15);
+}
+
+.menu-item span {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.menu-item .badge {
+  padding: 4px 10px;
+  background: #dc2626;
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 18px;
+  background: rgba(220, 38, 38, 0.1);
+  border: 2px solid rgba(220, 38, 38, 0.3);
+  border-radius: 12px;
+  color: #ff6b6b;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background: rgba(220, 38, 38, 0.15);
+  border-color: rgba(220, 38, 38, 0.5);
+}
+
+.logout-btn:active {
+  transform: scale(0.98);
+}

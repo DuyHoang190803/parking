@@ -1,0 +1,267 @@
+.vehicles-tab {
+  width: 100%;
+  height: 100vh;
+  background: #0a0a0a;
+  overflow-y: auto;
+  padding-bottom: 80px;
+}
+
+.vehicles-header {
+  padding: 20px;
+  background: #0a0a0a;
+  border-bottom: none;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.vehicles-header h2 {
+  font-size: 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.vehicles-content {
+  padding: 0 20px 20px 20px;
+}
+
+.search-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.vehicle-search-input {
+  flex: 1;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.vehicle-search-input:focus {
+  outline: none;
+  border-color: #4A90E2;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.vehicle-search-input::placeholder {
+  color: #666;
+  font-weight: 400;
+}
+
+.search-submit-btn {
+  padding: 14px 20px;
+  background: #4A90E2;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.search-submit-btn:hover {
+  background: #3a7bc8;
+}
+
+.search-submit-btn:active {
+  transform: scale(0.98);
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-title {
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #999;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 15px;
+  color: white;
+  font-weight: 600;
+  text-align: right;
+}
+
+.violation-alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(220, 38, 38, 0.15);
+  border: 2px solid rgba(220, 38, 38, 0.5);
+  border-radius: 12px;
+  color: #ff6b6b;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.result-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.result-card.overstay {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.result-card.half {
+  flex: 1;
+}
+
+.result-row {
+  display: flex;
+  gap: 15px;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #999;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.result-label {
+  font-size: 12px;
+  color: #999;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.result-value {
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+}
+
+.result-value.large {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.result-value.highlight {
+  color: #f59e0b;
+}
+
+.result-value.status {
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.result-value.status.expired {
+  background: rgba(220, 38, 38, 0.15);
+  color: #ff6b6b;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.result-value.status.active,
+.result-value.status.valid {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.result-detail {
+  font-size: 13px;
+  color: #999;
+  margin-top: 8px;
+}
+
+.issue-ticket-btn {
+  width: 100%;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 10px;
+}
+
+.issue-ticket-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.issue-ticket-btn:active {
+  transform: scale(0.98);
+}
+
+.no-results,
+.search-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  gap: 15px;
+  color: #666;
+}
+
+.no-results p,
+.search-placeholder p {
+  font-size: 18px;
+  color: #999;
+  font-weight: 600;
+}
+
+.no-results span,
+.search-placeholder span {
+  font-size: 14px;
+  color: #666;
+}

@@ -1,0 +1,139 @@
+.token-screen {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.token-container {
+  max-width: 450px;
+  width: 100%;
+  background: rgba(30, 30, 30, 0.9);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.token-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.token-icon {
+  font-size: 60px;
+  color: #4A90E2;
+  margin-bottom: 20px;
+}
+
+.token-header h1 {
+  font-size: 28px;
+  color: white;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.token-header p {
+  color: #999;
+  font-size: 14px;
+}
+
+.token-input-group {
+  margin-bottom: 30px;
+}
+
+.token-input {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s;
+  margin-bottom: 15px;
+}
+
+.token-input:focus {
+  outline: none;
+  border-color: #4A90E2;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.token-input::placeholder {
+  color: #666;
+}
+
+.error-message {
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #ff6b6b;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.validate-btn {
+  width: 100%;
+  padding: 16px;
+  background: #4A90E2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.validate-btn:hover {
+  background: #3a7bc8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+.validate-btn:active {
+  transform: scale(0.98);
+}
+
+.validate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.token-help {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.token-help p {
+  color: #999;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.token-help a {
+  color: #4A90E2;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.token-help a:hover {
+  color: #5ba3ff;
+  text-decoration: underline;
+}
