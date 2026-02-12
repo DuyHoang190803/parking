@@ -21,6 +21,19 @@ const LotDetail = ({ lotNumber, zoneName, status, onBack, onIssueTicket }: LotDe
     overstayDuration: '1 Hour',
   };
 
+  const violationInfo = {
+    licensePlate: 'ABC123',
+    contactNumber: '09-xxx-xxxx',
+    violationType: 'Not Paid',
+    sessionId: 'ABCD_1234',
+    zone: 'A',
+    lot: 'A-042',
+    date: '3:00 PM - 4:00 PM 11/2/2026',
+    outstandingDebt: '100,000 VND',
+  };
+
+  const isViolation = status === 'violation';
+
   return (
     <>
       {showChangeSession && (
@@ -37,61 +50,109 @@ const LotDetail = ({ lotNumber, zoneName, status, onBack, onIssueTicket }: LotDe
         <button className="back-btn" onClick={onBack}>
           <IoChevronBack size={24} />
         </button>
-        <h2>Parking Lot Detail</h2>
+        <h2>{isViolation ? 'Past Violation' : 'Parking Lot Detail'}</h2>
         <div style={{ width: '40px' }}></div>
       </div>
 
       <div className="lot-detail-content">
-        <div className="info-card">
-          <h3>Parking Information</h3>
-          <div className="info-row">
-            <span className="info-label">Zone:</span>
-            <span className="info-value">{zoneName}</span>
-          </div>
-          <div className="info-row">
-            <span className="info-label">Lot:</span>
-            <span className="info-value">{lotNumber}</span>
-          </div>
-          <div className="info-row">
-            <span className="info-label">License Plate:</span>
-            <span className="info-value">{lotInfo.registration}</span>
-          </div>
-        </div>
-
-        <div className="info-card">
-          <h3>Session Details</h3>
-          <div className="info-row">
-            <span className="info-label">
-              <IoTime size={18} />
-              Arrival Time:
-            </span>
-            <span className="info-value">{lotInfo.arrivalTime}</span>
-          </div>
-          <div className="info-row">
-            <span className="info-label">Paid Until:</span>
-            <span className="info-value">{lotInfo.paidUntil}</span>
-          </div>
-          <div className="info-row">
-            <span className="info-label">Overstay Duration:</span>
-            <span className="info-value">{lotInfo.overstayDuration}</span>
-          </div>
-        </div>
-
-        {status === 'new-session' ? (
+        {isViolation ? (
+          // Violation view
           <>
-            <button className="confirm-compliance-btn">
-              <IoCheckmarkCircle size={20} />
-              Confirm Compliance
-            </button>
-            <button className="change-session-btn" onClick={() => setShowChangeSession(true)}>
-              Change Session Details
+            <div className="info-card">
+              <div className="info-row">
+                <span className="info-label">License Plate:</span>
+                <span className="info-value">{violationInfo.licensePlate}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">Contact Number:</span>
+                <span className="info-value">{violationInfo.contactNumber}</span>
+              </div>
+            </div>
+
+            <div className="info-card">
+              <div className="info-row">
+                <span className="info-label">Violation Type:</span>
+                <span className="info-value">{violationInfo.violationType}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">For Session ID:</span>
+                <span className="info-value">{violationInfo.sessionId}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">Zone:</span>
+                <span className="info-value">{violationInfo.zone}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">Lot:</span>
+                <span className="info-value">{violationInfo.lot}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">Date:</span>
+                <span className="info-value">{violationInfo.date}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">Outstanding debt:</span>
+                <span className="info-value" style={{ color: '#dc2626', fontWeight: 700 }}>{violationInfo.outstandingDebt}</span>
+              </div>
+            </div>
+
+            <button className="issue-ticket-btn" onClick={onIssueTicket}>
+              <IoTicket size={20} />
+              Issue Ticket
             </button>
           </>
         ) : (
-          <button className="issue-ticket-btn" onClick={onIssueTicket}>
-            <IoTicket size={20} />
-            Issue Ticket
-          </button>
+          // Compliant/Overstay view
+          <>
+            <div className="info-card">
+              <div className="info-row">
+                <span className="info-label">Zone:</span>
+                <span className="info-value">{zoneName}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">Lot:</span>
+                <span className="info-value">{lotNumber}</span>
+              </div>
+            </div>
+
+            <div className="info-card">
+              <div className="info-row">
+                <span className="info-label">
+                  <IoTime size={18} />
+                  Arrival Time:
+                </span>
+                <span className="info-value">{lotInfo.arrivalTime}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">Paid Until:</span>
+                <span className="info-value">{lotInfo.paidUntil}</span>
+              </div>
+              <div className="info-row">
+                <span className="info-label">Overstay Duration:</span>
+                <span className="info-value">{lotInfo.overstayDuration}</span>
+              </div>
+            </div>
+
+            {status === 'new-session' ? (
+              <>
+                <button className="confirm-compliance-btn">
+                  <IoCheckmarkCircle size={20} />
+                  Confirm Compliance
+                </button>
+                <button className="change-session-btn" onClick={() => setShowChangeSession(true)}>
+                  Change Session Details
+                </button>
+              </>
+            ) : status === 'compliant' || status === 'overstay' ? (
+              // No button for compliant or overstay
+              null
+            ) : (
+              <button className="issue-ticket-btn" onClick={onIssueTicket}>
+                <IoTicket size={20} />
+                Issue Ticket
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>

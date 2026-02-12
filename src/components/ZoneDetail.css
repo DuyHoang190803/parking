@@ -219,7 +219,18 @@
 .lot-registration {
   font-size: 14px;
   color: #999;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
+}
+
+.lot-expire-in {
+  font-size: 13px;
+  color: #4A90E2;
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding: 4px 8px;
+  background: rgba(74, 144, 226, 0.15);
+  border-radius: 6px;
+  display: inline-block;
 }
 
 .lot-status {

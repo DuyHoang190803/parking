@@ -7,6 +7,7 @@ interface ParkingLot {
   number: string;
   registration: string;
   status: 'compliant' | 'warning' | 'violation' | 'new-session' | 'overstay' | 'no-payment';
+  expireIn?: string;
 }
 
 interface ZoneDetailProps {
@@ -20,13 +21,13 @@ const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
   const parkingLots: ParkingLot[] = [
-    { id: '1', number: 'B-042', registration: 'ABC-123', status: 'compliant' },
-    { id: '2', number: 'B-056', registration: 'GHI-321', status: 'new-session' },
-    { id: '3', number: 'B-129', registration: 'MNO-987', status: 'compliant' },
-    { id: '4', number: 'B-034', registration: 'DEF-456', status: 'overstay' },
+    { id: '1', number: 'B-042', registration: 'ABC-123', status: 'compliant', expireIn: '5 min' },
+    { id: '2', number: 'B-056', registration: 'GHI-321', status: 'new-session', expireIn: '60 min' },
+    { id: '3', number: 'B-129', registration: 'MNO-987', status: 'compliant', expireIn: '5 min' },
+    { id: '4', number: 'B-034', registration: 'DEF-456', status: 'overstay', expireIn: '5 min' },
     { id: '5', number: 'B-078', registration: 'XYZ-789', status: 'violation' },
     { id: '6', number: 'B-091', registration: 'JKL-234', status: 'no-payment' },
-    { id: '7', number: 'B-105', registration: 'PQR-567', status: 'warning' },
+    { id: '7', number: 'B-105', registration: 'PQR-567', status: 'warning', expireIn: '15 min' },
     { id: '8', number: 'B-143', registration: 'STU-890', status: 'violation' },
   ];
 
@@ -124,6 +125,11 @@ const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
           >
             <div className="lot-number">{lot.number}</div>
             <div className="lot-registration">{lot.registration}</div>
+            {lot.expireIn && (
+              <div className="lot-expire-in">
+                Expire in: {lot.expireIn}
+              </div>
+            )}
             <div className="lot-status">
               {getStatusIcon(lot.status)}
               <span className={`status-label ${lot.status}`}>

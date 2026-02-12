@@ -238,7 +238,7 @@ const IssueTicket = ({ onClose }: IssueTicketProps) => {
                   <span className="review-value">{zoneAuto}</span>
                 </div>
                 <div className="review-row">
-                  <span className="review-label">Violation:</span>
+                  <span className="review-label">Ticket type:</span>
                   <span className="review-value highlight">{violationType}</span>
                 </div>
                 <div className="review-row">

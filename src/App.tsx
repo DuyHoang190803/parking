@@ -5,13 +5,14 @@ import MapView from './components/MapView'
 import SearchModal from './components/SearchModal'
 import QRScanner from './components/QRScanner'
 import MenuSidebar from './components/MenuSidebar'
-import ActivityTab from './components/ActivityTab'
-import VehiclesTab from './components/VehiclesTab'
+// import ActivityTab from './components/ActivityTab'
+// import VehiclesTab from './components/VehiclesTab'
 import AccountTab from './components/AccountTab'
+import NotificationTab from './components/NotificationTab'
 import ZoneDetail from './components/ZoneDetail'
 import LotDetail from './components/LotDetail'
 import IssueTicket from './components/IssueTicket'
-import { IoMap, IoStatsChart, IoCar, IoPerson, IoQrCode } from 'react-icons/io5'
+import { IoMap, IoNotifications, IoPerson, IoQrCode } from 'react-icons/io5'
 
 interface ParkingSpot {
   id: number;
@@ -24,7 +25,8 @@ interface ParkingSpot {
   occupied: number;
 }
 
-type View = 'map' | 'list' | 'activity' | 'vehicles' | 'account';
+type View = 'map' | 'list' | 'notification' | 'account';
+// type View = 'map' | 'list' | 'activity' | 'vehicles' | 'account';
 
 function App() {
   const [mapboxToken, setMapboxToken] = useState<string | null>(null);
@@ -160,10 +162,12 @@ function App() {
           </div>
           <MapView mapboxToken={mapboxToken} onZoneClick={handleZoneClick} />
         </div>
-      ) : currentView === 'activity' ? (
-        <ActivityTab />
-      ) : currentView === 'vehicles' ? (
-        <VehiclesTab onIssueTicket={handleIssueTicket} />
+      // ) : currentView === 'activity' ? (
+      //   <ActivityTab />
+      // ) : currentView === 'vehicles' ? (
+      //   <VehiclesTab onIssueTicket={handleIssueTicket} />
+      ) : currentView === 'notification' ? (
+        <NotificationTab />
       ) : currentView === 'account' ? (
         <AccountTab />
       ) : (
@@ -286,7 +290,7 @@ function App() {
           <IoMap className="nav-icon" size={22} />
           <span className="nav-label">Map</span>
         </button>
-        <button 
+        {/* <button 
           className={`nav-item ${currentView === 'activity' ? 'active' : ''}`}
           onClick={() => handleViewChange('activity')}
         >
@@ -299,6 +303,13 @@ function App() {
         >
           <IoCar className="nav-icon" size={22} />
           <span className="nav-label">Vehicles</span>
+        </button> */}
+        <button 
+          className={`nav-item ${currentView === 'notification' ? 'active' : ''}`}
+          onClick={() => handleViewChange('notification')}
+        >
+          <IoNotifications className="nav-icon" size={22} />
+          <span className="nav-label">Notification</span>
         </button>
         <button 
           className={`nav-item ${currentView === 'account' ? 'active' : ''}`}

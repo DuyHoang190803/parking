@@ -7,7 +7,7 @@ interface Notification {
   licensePlate: string;
   lot: string;
   zone: string;
-  status: 'no-payment' | 'overstay' | 'violated-vehicle' | 'vehicle-entering';
+  status: 'no-payment' | 'overstay' | 'violated-vehicle-presence' | 'new-session-created';
   timestamp: string;
 }
 
@@ -22,17 +22,17 @@ const NotificationModal = ({ onClose }: NotificationModalProps) => {
   const notifications: Notification[] = [
     { id: '1', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'no-payment', timestamp: '5 min ago' },
     { id: '2', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'overstay', timestamp: '12 min ago' },
-    { id: '3', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'violated-vehicle', timestamp: '25 min ago' },
+    { id: '3', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'violated-vehicle-presence', timestamp: '25 min ago' },
     { id: '4', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'no-payment', timestamp: '35 min ago' },
-    { id: '5', licensePlate: 'DEF-456', lot: 'B5', zone: 'B', status: 'vehicle-entering', timestamp: '1 hour ago' },
+    { id: '5', licensePlate: 'DEF-456', lot: 'B5', zone: 'B', status: 'new-session-created', timestamp: '1 hour ago' },
     { id: '6', licensePlate: 'GHI-789', lot: 'C3', zone: 'C', status: 'overstay', timestamp: '2 hours ago' },
   ];
 
   const filterOptions = [
     { value: 'all', label: 'All Notifications' },
-    { value: 'vehicle-entering', label: 'Vehicle Entering' },
+    { value: 'new-session-created', label: 'New Session Created' },
     { value: 'overstay', label: 'Overstay' },
-    { value: 'violated-vehicle', label: 'Violated Vehicle' },
+    { value: 'violated-vehicle-presence', label: 'Violated Vehicle Presence' },
     { value: 'no-payment', label: 'No Payment' },
   ];
 
@@ -42,10 +42,10 @@ const NotificationModal = ({ onClose }: NotificationModalProps) => {
         return 'No Payment';
       case 'overstay':
         return 'Overstay';
-      case 'violated-vehicle':
-        return 'Violated Vehicle';
-      case 'vehicle-entering':
-        return 'Vehicle Entering the Lot';
+      case 'violated-vehicle-presence':
+        return 'Violated Vehicle Presence';
+      case 'new-session-created':
+        return 'New Session Created';
       default:
         return status;
     }
@@ -57,9 +57,9 @@ const NotificationModal = ({ onClose }: NotificationModalProps) => {
         return '#dc2626';
       case 'overstay':
         return '#f59e0b';
-      case 'violated-vehicle':
+      case 'violated-vehicle-presence':
         return '#dc2626';
-      case 'vehicle-entering':
+      case 'new-session-created':
         return '#4A90E2';
       default:
         return '#999';
