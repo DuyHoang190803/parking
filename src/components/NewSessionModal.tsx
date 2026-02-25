@@ -122,7 +122,7 @@ const NewSessionModal = ({ lotNumber, zoneName, onClose }: NewSessionModalProps)
               
               {photos.length > 0 && (
                 <div className="captured-photos-grid">
-                  {photos.map((photo, index) => (
+                  {photos.map((_, index) => (
                     <div key={index} className="photo-thumbnail">
                       <IoCheckmarkCircle className="photo-check" size={20} />
                       <span className="photo-label">Photo {index + 1}</span>
