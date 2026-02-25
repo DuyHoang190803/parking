@@ -182,7 +182,7 @@ const NewSessionModal = ({ lotNumber, zoneName, onClose }: NewSessionModalProps)
             </div>
 
             <button className="issue-ticket-btn-modal" onClick={handleIssueTicket}>
-              Issue Ticket
+              Create New Session
             </button>
             <button className="back-btn-modal" onClick={handleBack}>
               Back
