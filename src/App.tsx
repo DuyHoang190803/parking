@@ -48,6 +48,7 @@ function App() {
   const [selectedZone, setSelectedZone] = useState<{name: string; available: number; total: number; pricePerHour: string} | null>(null);
   const [selectedLot, setSelectedLot] = useState<string | null>(null);
   const [selectedLotStatus, setSelectedLotStatus] = useState<string | undefined>(undefined);
+  const [selectedLotHasWarning, setSelectedLotHasWarning] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     const savedToken = localStorage.getItem('mapbox_token');
@@ -102,9 +103,10 @@ function App() {
     setShowZoneDetail(true);
   };
 
-  const handleSelectLot = (lotNumber: string, status?: string) => {
+  const handleSelectLot = (lotNumber: string, status?: string, hasWarning?: boolean) => {
     setSelectedLot(lotNumber);
     setSelectedLotStatus(status);
+    setSelectedLotHasWarning(hasWarning);
     setShowLotDetail(true);
   };
 
@@ -137,6 +139,7 @@ function App() {
           lotNumber={selectedLot || 'B-302'} 
           zoneName={selectedZone?.name || 'Zone B - North'}
           status={selectedLotStatus}
+          hasWarning={selectedLotHasWarning}
           onBack={() => setShowLotDetail(false)}
           onIssueTicket={handleIssueTicket}
         />

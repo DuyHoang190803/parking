@@ -16,10 +16,8 @@ const NotificationTab = () => {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
   const notifications: Notification[] = [
-    { id: '1', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'no-payment', timestamp: '5 min ago' },
     { id: '2', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'overstay', timestamp: '12 min ago' },
     { id: '3', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'violated-vehicle-presence', timestamp: '25 min ago' },
-    { id: '4', licensePlate: 'ABC-123', lot: 'A1', zone: 'A', status: 'no-payment', timestamp: '35 min ago' },
     { id: '5', licensePlate: 'DEF-456', lot: 'B5', zone: 'B', status: 'new-session-created', timestamp: '1 hour ago' },
     { id: '6', licensePlate: 'GHI-789', lot: 'C3', zone: 'C', status: 'overstay', timestamp: '2 hours ago' },
   ];
@@ -29,7 +27,6 @@ const NotificationTab = () => {
     { value: 'new-session-created', label: 'New Session Created' },
     { value: 'overstay', label: 'Overstay' },
     { value: 'violated-vehicle-presence', label: 'Violated Vehicle Presence' },
-    { value: 'no-payment', label: 'No Payment' },
   ];
 
   const getStatusLabel = (status: string) => {

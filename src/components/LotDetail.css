@@ -114,7 +114,7 @@
   justify-content: center;
   gap: 10px;
   transition: all 0.2s;
-  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .issue-ticket-btn:hover {
@@ -191,6 +191,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  margin-top: 15px;
 }
 
 .change-session-btn:hover {
@@ -199,4 +200,89 @@
 
 .change-session-btn:active {
   transform: scale(0.98);
+}
+
+.end-session-btn {
+  width: 100%;
+  padding: 16px;
+  background: #f59e0b;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.end-session-btn:hover {
+  background: #d97706;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.end-session-btn:active {
+  transform: scale(0.98);
+}
+
+.add-session-btn {
+  width: 100%;
+  padding: 16px;
+  background: #4A90E2;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-session-btn:hover {
+  background: #3a7bc8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+.add-session-btn:active {
+  transform: scale(0.98);
+}
+
+.status-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lot-number-display {
+  display: flex;
+  align-items: center;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-dot.compliant {
+  background-color: #10b981;
+}
+
+.status-dot.new-session {
+  background-color: #4A90E2;
+}
+
+.status-dot.warning {
+  background-color: #f59e0b;
+}
+
+.status-dot.violation {
+  background-color: #dc2626;
+}
+
+.status-dot.empty {
+  background-color: #6b7280;
 }

@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.95);
-  z-index: 1000;
+  z-index: 3000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,6 +18,7 @@
   width: 100%;
   max-width: 420px;
   overflow: hidden;
+  z-index: 3001;
 }
 
 .qr-header {

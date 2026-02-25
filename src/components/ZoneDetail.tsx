@@ -1,64 +1,92 @@
 import { useState } from 'react';
-import { IoChevronBack, IoFunnel, IoCheckmarkCircle, IoWarning, IoCloseCircle } from 'react-icons/io5';
+import { IoChevronBack, IoFunnel, IoCheckmarkCircle, IoEllipsisVertical, IoWarning } from 'react-icons/io5';
+import { BsCheckCircle, BsPencil, BsTicketPerforated } from 'react-icons/bs';
+import ChangeSessionModal from './ChangeSessionModal';
+import NewSessionModal from './NewSessionModal';
+import IssueTicket from './IssueTicket';
 import './ZoneDetail.css';
 
 interface ParkingLot {
   id: string;
   number: string;
   registration: string;
-  status: 'compliant' | 'warning' | 'violation' | 'new-session' | 'overstay' | 'no-payment';
+  status: 'compliant' | 'violation' | 'new-session' | 'overstay' | 'empty';
   expireIn?: string;
+  hasWarning?: boolean;
 }
 
 interface ZoneDetailProps {
   zoneName: string;
   onBack: () => void;
-  onSelectLot: (lotNumber: string, status?: string) => void;
+  onSelectLot: (lotNumber: string, status?: string, hasWarning?: boolean) => void;
 }
 
 const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
   const [filter, setFilter] = useState<string>('all');
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+  const [showChangeSessionModal, setShowChangeSessionModal] = useState(false);
+  const [showNewSessionModal, setShowNewSessionModal] = useState(false);
+  const [showIssueTicket, setShowIssueTicket] = useState(false);
+  const [selectedLot, setSelectedLot] = useState<ParkingLot | null>(null);
 
   const parkingLots: ParkingLot[] = [
-    { id: '1', number: 'B-042', registration: 'ABC-123', status: 'compliant', expireIn: '5 min' },
-    { id: '2', number: 'B-056', registration: 'GHI-321', status: 'new-session', expireIn: '60 min' },
-    { id: '3', number: 'B-129', registration: 'MNO-987', status: 'compliant', expireIn: '5 min' },
-    { id: '4', number: 'B-034', registration: 'DEF-456', status: 'overstay', expireIn: '5 min' },
-    { id: '5', number: 'B-078', registration: 'XYZ-789', status: 'violation' },
-    { id: '6', number: 'B-091', registration: 'JKL-234', status: 'no-payment' },
-    { id: '7', number: 'B-105', registration: 'PQR-567', status: 'warning', expireIn: '15 min' },
-    { id: '8', number: 'B-143', registration: 'STU-890', status: 'violation' },
+    { id: '1', number: 'B-042', registration: 'ABC-123', status: 'compliant', expireIn: '08:48' },
+    { id: '2', number: 'B-056', registration: 'GHI-321', status: 'new-session', expireIn: '46:30', hasWarning: true },
+    { id: '3', number: 'B-129', registration: 'MNO-987', status: 'compliant', expireIn: '05:22' },
+    { id: '4', number: 'B-034', registration: 'DEF-456', status: 'overstay', expireIn: '00:00' },
+    { id: '5', number: 'B-078', registration: 'XYZ-789', status: 'new-session', expireIn: '30:00', hasWarning: true },
+    { id: '6', number: 'B-091', registration: 'JKL-234', status: 'new-session', expireIn: '25:00', hasWarning: true },
+    { id: '7', number: 'B-105', registration: 'PQR-567', status: 'overstay', expireIn: '15:30' },
+    { id: '8', number: 'B-143', registration: 'STU-890', status: 'new-session', expireIn: '20:00', hasWarning: true },
+    { id: '9', number: 'B-155', registration: '', status: 'empty' },
+    { id: '10', number: 'B-167', registration: '', status: 'empty' },
+    { id: '11', number: 'B-201', registration: 'XYZ-111', status: 'new-session', expireIn: '55:00' },
+    { id: '12', number: 'B-202', registration: 'ABC-222', status: 'new-session', expireIn: '40:00' },
   ];
 
-  const filteredLots = parkingLots.filter(lot => 
-    filter === 'all' || lot.status === filter
-  );
+  const filteredLots = parkingLots.filter(lot => {
+    if (filter === 'all') return true;
+    if (filter === 'violation') {
+      // Violation filter shows new-session with warning
+      return lot.status === 'new-session' && lot.hasWarning;
+    }
+    if (filter === 'new-session') {
+      // New session filter shows new-session WITHOUT warning
+      return lot.status === 'new-session' && !lot.hasWarning;
+    }
+    return lot.status === filter;
+  });
 
   const filterOptions = [
     { value: 'all', label: 'All' },
     { value: 'new-session', label: 'New Session Created' },
     { value: 'overstay', label: 'Overstay' },
-    { value: 'violation', label: 'Violated Vehicle Presence' },
-    { value: 'no-payment', label: 'No Payment' },
+    { value: 'empty', label: 'Empty' },
+    { value: 'violation', label: 'Violation' },
     { value: 'compliant', label: 'Compliant' },
   ];
 
-  const getStatusIcon = (status: string) => {
+  const getStatusDot = (status: string) => {
+    let dotClass = '';
     switch (status) {
       case 'compliant':
-        return <IoCheckmarkCircle className="status-icon compliant" size={24} />;
+        dotClass = 'compliant';
+        break;
       case 'new-session':
-        return <IoCheckmarkCircle className="status-icon new-session" size={24} />;
-      case 'warning':
+        dotClass = 'new-session';
+        break;
       case 'overstay':
-        return <IoWarning className="status-icon warning" size={24} />;
+        dotClass = 'warning';
+        break;
       case 'violation':
-      case 'no-payment':
-        return <IoCloseCircle className="status-icon violation" size={24} />;
-      default:
-        return null;
+        dotClass = 'violation';
+        break;
+      case 'empty':
+        dotClass = 'empty';
+        break;
     }
+    return <span className={`status-dot ${dotClass}`}></span>;
   };
 
   const getStatusLabel = (status: string) => {
@@ -67,16 +95,38 @@ const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
         return 'COMPLIANT';
       case 'new-session':
         return 'NEW SESSION';
-      case 'warning':
-        return 'WARNING';
       case 'overstay':
         return 'OVERSTAY';
       case 'violation':
         return 'VIOLATION';
-      case 'no-payment':
-        return 'NO PAYMENT';
+      case 'empty':
+        return 'EMPTY';
       default:
         return '';
+    }
+  };
+
+  const handleMenuClick = (e: React.MouseEvent, lotId: string) => {
+    e.stopPropagation();
+    setOpenMenuId(openMenuId === lotId ? null : lotId);
+  };
+
+  const handleMenuAction = (e: React.MouseEvent, action: string, lotNumber: string) => {
+    e.stopPropagation();
+    setOpenMenuId(null);
+    const lot = parkingLots.find(l => l.number === lotNumber);
+    
+    if (action === 'edit') {
+      setSelectedLot(lot || null);
+      setShowChangeSessionModal(true);
+    } else if (action === 'add-session') {
+      setSelectedLot(lot || null);
+      setShowNewSessionModal(true);
+    } else if (action === 'issue-ticket') {
+      setSelectedLot(lot || null);
+      setShowIssueTicket(true);
+    } else if (action === 'confirm') {
+      console.log(`Confirm for lot: ${lotNumber}`);
     }
   };
 
@@ -88,7 +138,7 @@ const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
         </button>
         <div className="zone-title">
           <h2>{zoneName}</h2>
-          <p>2 bays</p>
+          <p>10 bays</p>
         </div>
         <button className="filter-btn" onClick={() => setShowFilterDropdown(!showFilterDropdown)}>
           <IoFunnel size={20} />
@@ -118,27 +168,134 @@ const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
 
       <div className="lots-grid">
         {filteredLots.map((lot) => (
-          <button
-            key={lot.id}
-            className={`lot-card ${lot.status}`}
-            onClick={() => onSelectLot(lot.number, lot.status)}
-          >
-            <div className="lot-number">{lot.number}</div>
-            <div className="lot-registration">{lot.registration}</div>
-            {lot.expireIn && (
-              <div className="lot-expire-in">
-                Expire in: {lot.expireIn}
+          <div key={lot.id} className="lot-card-wrapper">
+            <div
+              className={`lot-card ${lot.status} ${lot.hasWarning ? 'has-warning' : ''}`}
+            >
+              {/* Only show 3-dot menu for new-session */}
+              {lot.status === 'new-session' && (
+                <button 
+                  className="lot-menu-btn"
+                  onClick={(e) => handleMenuClick(e, lot.id)}
+                >
+                  <IoEllipsisVertical size={18} />
+                </button>
+              )}
+              
+              <div 
+                className="lot-card-content"
+                onClick={() => onSelectLot(lot.number, lot.status, lot.hasWarning)}
+              >
+                <div className="lot-number-row">
+                  <div className="lot-number">{lot.number}</div>
+                  {/* Warning icon next to lot number */}
+                  {lot.hasWarning && (
+                    <div className="lot-warning-icon">
+                      <IoWarning size={18} />
+                    </div>
+                  )}
+                </div>
+                {lot.registration && (
+                  <div className="lot-registration">{lot.registration}</div>
+                )}
+                
+                <div className="lot-status">
+                  {getStatusDot(lot.status)}
+                  <span className={`status-label ${lot.status}`}>
+                    {getStatusLabel(lot.status)}
+                  </span>
+                </div>
+                
+                {lot.expireIn && (
+                  <div className="lot-remaining">
+                    <div className="remaining-label">EXPIRED</div>
+                    <div className="remaining-time">{lot.expireIn}</div>
+                  </div>
+                )}
               </div>
-            )}
-            <div className="lot-status">
-              {getStatusIcon(lot.status)}
-              <span className={`status-label ${lot.status}`}>
-                {getStatusLabel(lot.status)}
-              </span>
+              
+              {/* Action buttons for different statuses */}
+              {(lot.status === 'compliant' || lot.status === 'overstay') && (
+                <button 
+                  className="lot-action-btn end-session"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMenuAction(e, 'end-session', lot.number);
+                  }}
+                >
+                  End session
+                </button>
+              )}
+              
+              {lot.status === 'empty' && (
+                <button 
+                  className="lot-action-btn add-session"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMenuAction(e, 'add-session', lot.number);
+                  }}
+                >
+                  Add session
+                </button>
+              )}
             </div>
-          </button>
+            
+            {openMenuId === lot.id && lot.status === 'new-session' && (
+              <>
+                <div className="lot-menu-overlay" onClick={() => setOpenMenuId(null)} />
+                <div className="lot-menu-dropdown">
+                  <button 
+                    className="lot-menu-item"
+                    onClick={(e) => handleMenuAction(e, 'confirm', lot.number)}
+                  >
+                    <BsCheckCircle size={18} />
+                    <span>Confirm</span>
+                  </button>
+                  <button 
+                    className="lot-menu-item"
+                    onClick={(e) => handleMenuAction(e, 'edit', lot.number)}
+                  >
+                    <BsPencil size={18} />
+                    <span>Edit</span>
+                  </button>
+                  {lot.hasWarning && (
+                    <button 
+                      className="lot-menu-item issue-ticket"
+                      onClick={(e) => handleMenuAction(e, 'issue-ticket', lot.number)}
+                    >
+                      <BsTicketPerforated size={18} />
+                      <span>Issue Ticket</span>
+                    </button>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
         ))}
       </div>
+
+      {showChangeSessionModal && selectedLot && (
+        <ChangeSessionModal
+          lotNumber={selectedLot.number}
+          zoneName={zoneName}
+          currentPlate={selectedLot.registration}
+          onClose={() => setShowChangeSessionModal(false)}
+        />
+      )}
+
+      {showNewSessionModal && selectedLot && (
+        <NewSessionModal
+          lotNumber={selectedLot.number}
+          zoneName={zoneName}
+          onClose={() => setShowNewSessionModal(false)}
+        />
+      )}
+
+      {showIssueTicket && (
+        <IssueTicket
+          onClose={() => setShowIssueTicket(false)}
+        />
+      )}
     </div>
   );
 };

@@ -1,18 +1,22 @@
 import { useState } from 'react';
-import { IoChevronBack, IoTicket, IoTime, IoCheckmarkCircle } from 'react-icons/io5';
+import { IoChevronBack, IoTicket, IoTime, IoCheckmarkCircle, IoWarning } from 'react-icons/io5';
+import { BsTicketPerforated } from 'react-icons/bs';
 import ChangeSessionModal from './ChangeSessionModal';
+import NewSessionModal from './NewSessionModal';
 import './LotDetail.css';
 
 interface LotDetailProps {
   lotNumber: string;
   zoneName: string;
   status?: string;
+  hasWarning?: boolean;
   onBack: () => void;
   onIssueTicket: () => void;
 }
 
-const LotDetail = ({ lotNumber, zoneName, status, onBack, onIssueTicket }: LotDetailProps) => {
+const LotDetail = ({ lotNumber, zoneName, status, hasWarning, onBack, onIssueTicket }: LotDetailProps) => {
   const [showChangeSession, setShowChangeSession] = useState(false);
+  const [showNewSession, setShowNewSession] = useState(false);
   
   const lotInfo = {
     registration: 'DEF-789',
@@ -34,6 +38,45 @@ const LotDetail = ({ lotNumber, zoneName, status, onBack, onIssueTicket }: LotDe
 
   const isViolation = status === 'violation';
 
+  const getStatusLabel = (status?: string) => {
+    switch (status) {
+      case 'compliant':
+        return 'COMPLIANT';
+      case 'new-session':
+        return 'NEW SESSION';
+      case 'overstay':
+        return 'OVERSTAY';
+      case 'violation':
+        return 'VIOLATION';
+      case 'empty':
+        return 'EMPTY';
+      default:
+        return '';
+    }
+  };
+
+  const getStatusDot = (status?: string) => {
+    let dotClass = '';
+    switch (status) {
+      case 'compliant':
+        dotClass = 'compliant';
+        break;
+      case 'new-session':
+        dotClass = 'new-session';
+        break;
+      case 'overstay':
+        dotClass = 'warning';
+        break;
+      case 'violation':
+        dotClass = 'violation';
+        break;
+      case 'empty':
+        dotClass = 'empty';
+        break;
+    }
+    return <span className={`status-dot ${dotClass}`}></span>;
+  };
+
   return (
     <>
       {showChangeSession && (
@@ -44,13 +87,21 @@ const LotDetail = ({ lotNumber, zoneName, status, onBack, onIssueTicket }: LotDe
           onClose={() => setShowChangeSession(false)}
         />
       )}
+
+      {showNewSession && (
+        <NewSessionModal
+          lotNumber={lotNumber}
+          zoneName={zoneName}
+          onClose={() => setShowNewSession(false)}
+        />
+      )}
       
     <div className="lot-detail">
       <div className="lot-detail-header">
         <button className="back-btn" onClick={onBack}>
           <IoChevronBack size={24} />
         </button>
-        <h2>{isViolation ? 'Past Violation' : 'Parking Lot Detail'}</h2>
+        <h2>{isViolation ? 'Past Violation' : 'Session Detail'}</h2>
         <div style={{ width: '40px' }}></div>
       </div>
 
@@ -111,8 +162,22 @@ const LotDetail = ({ lotNumber, zoneName, status, onBack, onIssueTicket }: LotDe
               </div>
               <div className="info-row">
                 <span className="info-label">Lot:</span>
-                <span className="info-value">{lotNumber}</span>
+                <span className="info-value lot-number-display">
+                  {hasWarning && (
+                    <IoWarning size={20} color="#f59e0b" style={{ marginRight: '8px' }} />
+                  )}
+                  {lotNumber}
+                </span>
               </div>
+              {status && (
+                <div className="info-row">
+                  <span className="info-label">Status:</span>
+                  <span className="info-value status-display">
+                    {getStatusDot(status)}
+                    {getStatusLabel(status)}
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="info-card">
@@ -137,21 +202,27 @@ const LotDetail = ({ lotNumber, zoneName, status, onBack, onIssueTicket }: LotDe
               <>
                 <button className="confirm-compliance-btn">
                   <IoCheckmarkCircle size={20} />
-                  Confirm Compliance
+                  Confirm
                 </button>
                 <button className="change-session-btn" onClick={() => setShowChangeSession(true)}>
-                  Change Session Details
+                  Change Session
                 </button>
+                {hasWarning && (
+                  <button className="issue-ticket-btn" onClick={onIssueTicket}>
+                    <BsTicketPerforated size={20} />
+                    Issue Ticket
+                  </button>
+                )}
               </>
             ) : status === 'compliant' || status === 'overstay' ? (
-              // No button for compliant or overstay
-              null
-            ) : (
-              <button className="issue-ticket-btn" onClick={onIssueTicket}>
-                <IoTicket size={20} />
-                Issue Ticket
+              <button className="end-session-btn">
+                End Session
               </button>
-            )}
+            ) : status === 'empty' ? (
+              <button className="add-session-btn" onClick={() => setShowNewSession(true)}>
+                Add Session
+              </button>
+            ) : null}
           </>
         )}
       </div>
