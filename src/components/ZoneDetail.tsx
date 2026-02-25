@@ -3,6 +3,7 @@ import { IoChevronBack, IoFunnel, IoCheckmarkCircle, IoEllipsisVertical, IoWarni
 import { BsCheckCircle, BsPencil, BsTicketPerforated } from 'react-icons/bs';
 import ChangeSessionModal from './ChangeSessionModal';
 import NewSessionModal from './NewSessionModal';
+import PastViolation from './PastViolation';
 import IssueTicket from './IssueTicket';
 import './ZoneDetail.css';
 
@@ -27,6 +28,7 @@ const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [showChangeSessionModal, setShowChangeSessionModal] = useState(false);
   const [showNewSessionModal, setShowNewSessionModal] = useState(false);
+  const [showPastViolation, setShowPastViolation] = useState(false);
   const [showIssueTicket, setShowIssueTicket] = useState(false);
   const [selectedLot, setSelectedLot] = useState<ParkingLot | null>(null);
 
@@ -124,10 +126,15 @@ const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
       setShowNewSessionModal(true);
     } else if (action === 'issue-ticket') {
       setSelectedLot(lot || null);
-      setShowIssueTicket(true);
+      setShowPastViolation(true);
     } else if (action === 'confirm') {
       console.log(`Confirm for lot: ${lotNumber}`);
     }
+  };
+
+  const handleIssueTicketFromPastViolation = () => {
+    setShowPastViolation(false);
+    setShowIssueTicket(true);
   };
 
   return (
@@ -288,6 +295,13 @@ const ZoneDetail = ({ zoneName, onBack, onSelectLot }: ZoneDetailProps) => {
           lotNumber={selectedLot.number}
           zoneName={zoneName}
           onClose={() => setShowNewSessionModal(false)}
+        />
+      )}
+
+      {showPastViolation && (
+        <PastViolation
+          onClose={() => setShowPastViolation(false)}
+          onIssueTicket={handleIssueTicketFromPastViolation}
         />
       )}
 

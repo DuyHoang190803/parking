@@ -11,6 +11,7 @@ import AccountTab from './components/AccountTab'
 import NotificationTab from './components/NotificationTab'
 import ZoneDetail from './components/ZoneDetail'
 import LotDetail from './components/LotDetail'
+import PastViolation from './components/PastViolation'
 import IssueTicket from './components/IssueTicket'
 import { IoMap, IoNotifications, IoPerson, IoQrCode } from 'react-icons/io5'
 
@@ -42,6 +43,7 @@ function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [showZoneDetail, setShowZoneDetail] = useState(false);
   const [showLotDetail, setShowLotDetail] = useState(false);
+  const [showPastViolation, setShowPastViolation] = useState(false);
   const [showIssueTicket, setShowIssueTicket] = useState(false);
   
   // Navigation state
@@ -111,6 +113,11 @@ function App() {
   };
 
   const handleIssueTicket = () => {
+    setShowPastViolation(true);
+  };
+
+  const handleIssueTicketFromPastViolation = () => {
+    setShowPastViolation(false);
     setShowIssueTicket(true);
   };
 
@@ -142,6 +149,12 @@ function App() {
           hasWarning={selectedLotHasWarning}
           onBack={() => setShowLotDetail(false)}
           onIssueTicket={handleIssueTicket}
+        />
+      )}
+      {showPastViolation && (
+        <PastViolation
+          onClose={() => setShowPastViolation(false)}
+          onIssueTicket={handleIssueTicketFromPastViolation}
         />
       )}
       {showIssueTicket && (
